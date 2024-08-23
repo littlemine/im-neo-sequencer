@@ -27,7 +27,7 @@ namespace ImGui {
     }
 
     void
-    RenderNeoSequencerTopBarOverlay(float zoom, float valuesWidth,uint32_t startFrame, uint32_t endFrame, uint32_t offsetFrame, const ImVec2 &cursor, const ImVec2 &size,
+    RenderNeoSequencerTopBarOverlay(float zoom, float valuesWidth,unsigned startFrame, unsigned endFrame, unsigned offsetFrame, const ImVec2 &cursor, const ImVec2 &size,
                                     ImDrawList *drawList, bool drawFrameLines,
                                     bool drawFrameText, float maxPixelsPerTick) {
         if(!drawList) drawList = ImGui::GetWindowDrawList();
@@ -36,15 +36,15 @@ namespace ImGui {
 
         const ImRect barArea = {cursor + ImVec2{style.FramePadding.x + valuesWidth,style.FramePadding.y}, cursor + size };
 
-        const uint32_t viewEnd = endFrame + offsetFrame;
-        const uint32_t viewStart = startFrame + offsetFrame;
+        const unsigned viewEnd = endFrame + offsetFrame;
+        const unsigned viewStart = startFrame + offsetFrame;
 
         if(drawFrameLines) {
-            const auto count = (int32_t)((float)((viewEnd + 1) - viewStart) / zoom);
+            const auto count = (int)((float)((viewEnd + 1) - viewStart) / zoom);
 
-            int32_t counter = 0;
-            uint32_t primaryFrames = pow(10, counter++);
-            uint32_t secondaryFrames = pow(10, counter);
+            int counter = 0;
+            unsigned primaryFrames = pow(10, counter++);
+            unsigned secondaryFrames = pow(10, counter);
 
             float perFrameWidth = GetPerFrameWidth(size.x, valuesWidth, endFrame, startFrame, zoom);
 
@@ -63,7 +63,7 @@ namespace ImGui {
                 secondaryFrames = 10;
             }
 
-            for(int32_t i = 0; i < count; i++) {
+            for(int i = 0; i < count; i++) {
 
                 const auto primaryFrame = ((viewStart + i) % primaryFrames == 0);
                 const auto secondaryFrame = ((viewStart + i) % secondaryFrames == 0);
@@ -121,7 +121,7 @@ namespace ImGui {
         }
     }
 
-    float GetPerFrameWidth(float totalSizeX, float valuesWidth, uint32_t endFrame, uint32_t startFrame, float zoom) {
+    float GetPerFrameWidth(float totalSizeX, float valuesWidth, unsigned endFrame, unsigned startFrame, float zoom) {
         const auto& imStyle = GetStyle();
 
         const auto size = totalSizeX - valuesWidth - imStyle.FramePadding.x;

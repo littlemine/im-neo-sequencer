@@ -97,7 +97,7 @@ struct ImGuiNeoSequencerStyle {
 };
 
 namespace ImGui {
-    typedef int32_t FrameIndexType;
+    typedef int FrameIndexType;
 
     IMGUI_API const ImVec4& GetStyleNeoSequencerColorVec4(ImGuiNeoSequencerCol idx);
     IMGUI_API ImGuiNeoSequencerStyle& GetNeoSequencerStyle();
@@ -112,12 +112,12 @@ namespace ImGui {
     IMGUI_API bool BeginNeoGroup(const char* label, bool* open = nullptr);
     IMGUI_API void EndNeoGroup();
 
-    IMGUI_API bool BeginNeoTimeline(const char* label,FrameIndexType ** keyframes, uint32_t keyframeCount, bool * open = nullptr, ImGuiNeoTimelineFlags flags = ImGuiNeoTimelineFlags_None);
+    IMGUI_API bool BeginNeoTimeline(const char* label,FrameIndexType ** keyframes, unsigned keyframeCount, bool * open = nullptr, ImGuiNeoTimelineFlags flags = ImGuiNeoTimelineFlags_None);
     IMGUI_API void EndNeoTimeLine(); //Call only when BeginNeoTimeline() returns true!!
 
     // Fully customizable timeline with per key callback
     IMGUI_API bool BeginNeoTimelineEx(const char* label, bool * open = nullptr, ImGuiNeoTimelineFlags flags = ImGuiNeoTimelineFlags_None);
-    IMGUI_API void NeoKeyframe(int32_t* value);
+    IMGUI_API void NeoKeyframe(int* value);
 
     IMGUI_API bool IsNeoKeyframeHovered();
     IMGUI_API bool IsNeoKeyframeSelected();
@@ -136,7 +136,7 @@ namespace ImGui {
     IMGUI_API bool IsNeoKeyframeSelectionRightClicked(); // Is selection rightclicked?
 
     // Call only in BeginNeoTimeline / EndNeoTimeLine scope, returns selection per timeline and size per timeline
-    IMGUI_API uint32_t GetNeoKeyframeSelectionSize();
+    IMGUI_API unsigned GetNeoKeyframeSelectionSize();
     IMGUI_API void GetNeoKeyframeSelection(FrameIndexType  * selection);
 
 
@@ -147,7 +147,7 @@ namespace ImGui {
 
 #ifdef __cplusplus
     // C++ helper
-    IMGUI_API bool BeginNeoTimeline(const char* label,std::vector<int32_t> & keyframes ,bool * open = nullptr, ImGuiNeoTimelineFlags flags = ImGuiNeoTimelineFlags_None);
+    IMGUI_API bool BeginNeoTimeline(const char* label,std::vector<int> & keyframes ,bool * open = nullptr, ImGuiNeoTimelineFlags flags = ImGuiNeoTimelineFlags_None);
 #endif
 }
 
